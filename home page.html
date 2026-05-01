@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brightfield Academy | Student Portal</title>
+    <style>
+        /* Base Colors */
+        :root {
+            --navy-blue: #102C57;
+            --royal-blue: #1A5F7A;
+            --sky-blue: #87CEEB;
+            --clean-white: #FFFFFF;
+            --soft-gray: #F4F7F6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--soft-gray);
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--clean-white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--navy-blue);
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--navy-blue);
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .login-btn {
+            background-color: var(--navy-blue);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy-blue), var(--royal-blue));
+            color: white;
+            padding: 60px 10%;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .cta-group { margin-top: 25px; }
+        .cta-btn {
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+            display: inline-block;
+        }
+        .primary { background-color: var(--clean-white); color: var(--navy-blue); }
+        .secondary { border: 2px solid white; color: white; }
+
+        /* Events Section */
+        .container { padding: 40px 10%; }
+        .section-title { color: var(--navy-blue); border-left: 5px solid var(--sky-blue); padding-left: 15px; margin-bottom: 30px; }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .event-card:hover { transform: translateY(-5px); }
+
+        .event-info { padding: 20px; }
+        .event-date { color: var(--royal-blue); font-size: 0.9rem; font-weight: bold; }
+        .event-title { margin: 10px 0; font-size: 1.2rem; color: var(--navy-blue); }
+        
+        .details-link {
+            color: var(--royal-blue);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy-blue);
+            color: white;
+            padding: 40px 10%;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Brightfield Academy</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Events</a>
+            <a href="#">Portals</a>
+            <a href="#" class="login-btn">Login</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Welcome to the Student Portal</h1>
+        <p>Your hub for school events, academic tracking, and campus life.</p>
+        <div class="cta-group">
+            <a href="#" class="cta-btn primary">Register for an Event</a>
+            <a href="#" class="cta-btn secondary">View Calendar</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Upcoming School Events</h2>
+        <div class="event-grid">
+            <!-- Card 1 -->
+            <div class="event-card">
+                <div class="event-info">
+                    <span class="event-date">May 15, 2024</span>
+                    <h3 class="event-title">Annual Science Fair</h3>
+                    <p>Showcase your innovations and compete for top prizes.</p>
+                    <a href="#" class="details-link">Learn More →</a>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="event-card">
+                <div class="event-info">
+                    <span class="event-date">May 22, 2024</span>
+                    <h3 class="event-title">Inter-School Soccer</h3>
+                    <p>Support our team in the regional semi-finals!</p>
+                    <a href="#" class="details-link">Learn More →</a>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="event-card">
+                <div class="event-info">
+                    <span class="event-date">June 02, 2024</span>
+                    <h3 class="event-title">Spring Music Concert</h3>
+                    <p>A night of classical and contemporary performances.</p>
+                    <a href="#" class="details-link">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Brightfield Academy. All Rights Reserved.</p>
+        <p>123 School Lane, Education City | info@brightfield.edu</p>
+    </footer>
+
+</body>
+</html>
