@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Registration Form</title>
+  <link rel="icon" type="image/PNG" href="logo school.png">
+  <script src="https://unpkg.com/vue@3"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row div {
+      flex: 1;
+    }
+
+    .gender {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+
+    .checkbox {
+      margin-top: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #4facfe;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00c6ff;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+<div id="app">
+  <div class="container">
+    <h2>School Registration</h2>
+
+    <!-- Student Info -->
+    <label>Full Name</label>
+    <input type="text" v-model="form.name">
+    
+    <label>Date of Birth</label>
+    <input type="date" v-model="form.dob">
+
+    <label>Gender</label>
+    <div class="gender">
+      <label><input type="radio" value="Male" v-model="form.gender"> Male</label>
+      <label><input type="radio" value="Female" v-model="form.gender"> Female</label>
+    </div>
+
+    <label>Email</label>
+    <input type="email" v-model="form.email">
+
+    <label>Phone Number</label>
+    <input type="text" v-model="form.phone">
+
+    <!-- Parent Info -->
+    <label>Parent/Guardian Name</label>
+    <input type="text" v-model="form.parent">
+
+    <label>Parent Phone</label>
+    <input type="text" v-model="form.parentPhone">
+
+    <!-- Course Selection -->
+    <label>Select Class</label>
+    <select v-model="form.class">
+      <option disabled value="">Choose class</option>
+      <option>Senior 1</option>
+      <option>Senior 2</option>
+      <option>Senior 3</option>
+      <option>Senior 4</option>
+      <option>Senior 5</option>
+      <option>Senior 6</option>
+    </select>
+
+    <label>Address</label>
+    <textarea v-model="form.address"></textarea>
+
+    <!-- Rules Agreement -->
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" v-model="form.agree">
+        I agree to follow all school rules and regulations
+      </label>
+    </div>
+
+    <!-- Error -->
+    <div class="error" v-if="error">{{ error }}</div>
+
+    <!-- Button -->
+    <button @click="submitForm">Register</button>
+
+    <!-- Success -->
+    <div class="success" v-if="success">{{ success }}</div>
+  </div>
+</div>
+
+<script>
+const app = Vue.createApp({
+  data() {
+    return {
+      form: {
+        name: "",
+        dob: "",
+        gender: "",
+        email: "",
+        phone: "",
+        parent: "",
+        parentPhone: "",
+        class: "",
+        address: "",
+        agree: false
+      },
+      error: "",
+      success: ""
+    }
+  },
+  methods: {
+    submitForm() {
+      this.error = "";
+      this.success = "";
+
+      if (!this.form.name || !this.form.dob || !this.form.gender || !this.form.email) {
+        this.error = "Please fill all required fields!";
+        return;
+      }
+
+      if (!this.form.agree) {
+        this.error = "You must agree to school rules!";
+        return;
+      }
+
+      this.success = "Registration Successful!";
+      console.log(this.form);
+    }
+  }
+});
+
+app.mount('#app');
+</script>
+</body>
+</html>
