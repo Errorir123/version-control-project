@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Book Registration</title>
+<script src="https://unpkg.com/vue@3"></script>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+}
+
+.nav {
+  text-align: center;
+  padding: 15px;
+}
+.nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  color: white;
+}
+
+.books {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card h3 {
+  margin: 0;
+}
+
+.card p {
+  font-size: 14px;
+}
+
+button {
+  background: #ff758c;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background: #ff5e78;
+}
+
+.form-box {
+  background: white;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.success {
+  color: green;
+  text-align: center;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- Navigation -->
+  <div class="nav">
+    <a href="index.html">Student Registration</a>
+    <a href="course-registration.html">Course Registration</a>
+    <a href="book-registration.html">Book Registration</a>
+  </div>
+
+  <div class="container">
+    <h2>School Library Books</h2>
+
+    <!-- Book Cards -->
+    <div class="books">
+      <div class="card" v-for="book in books">
+        <h3>{{book.title}}</h3>
+        <p><strong>Author:</strong> {{book.author}}</p>
+        <p><strong>Category:</strong> {{book.category}}</p>
+        <p><strong>Available:</strong> {{book.available}}</p>
+        <button @click="selectBook(book)">View & Register</button>
+      </div>
+    </div>
+
+    <!-- Book Details + Registration -->
+    <div class="form-box" v-if="selectedBook">
+      <h3>{{selectedBook.title}}</h3>
+
+      <p><strong>Author:</strong> {{selectedBook.author}}</p>
+      <p><strong>ISBN:</strong> {{selectedBook.isbn}}</p>
+      <p><strong>Category:</strong> {{selectedBook.category}}</p>
+      <p><strong>Copies Available:</strong> {{selectedBook.available}}</p>
+      <p><strong>Description:</strong> {{selectedBook.description}}</p>
+
+      <hr>
+
+      <label>Student Name</label>
+      <input type="text" v-model="studentName">
+
+      <label>Student ID</label>
+      <input type="text" v-model="studentId">
+
+      <label>Borrow Duration</label>
+      <select v-model="duration">
+        <option disabled value="">Select duration</option>
+        <option>1 Week</option>
+        <option>2 Weeks</option>
+        <option>1 Month</option>
+      </select>
+
+      <button @click="registerBook">Borrow Book</button>
+
+      <div class="success" v-if="success">{{success}}</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const app = Vue.createApp({
+  data() {
+    return {
+      books: [
+        {
+          title: "Introduction to Computer Science",
+          author: "John Doe",
+          category: "Technology",
+          isbn: "978-123456789",
+          available: 5,
+          description: "Basic concepts of programming and computing."
+        },
+        {
+          title: "Advanced Mathematics",
+          author: "Alice Smith",
+          category: "Mathematics",
+          isbn: "978-987654321",
+          available: 3,
+          description: "Covers algebra, calculus, and statistics."
+        },
+        {
+          title: "Physics Principles",
+          author: "Dr. Brown",
+          category: "Science",
+          isbn: "978-456789123",
+          available: 4,
+          description: "Fundamentals of motion, force, and energy."
+        },
+        {
+          title: "Biology Basics",
+          author: "Jane White",
+          category: "Science",
+          isbn: "978-741852963",
+          available: 2,
+          description: "Introduction to living organisms."
+        }
+      ],
+      selectedBook: null,
+      studentName: "",
+      studentId: "",
+      duration: "",
+      success: ""
+    }
+  },
+
+  methods: {
+    selectBook(book) {
+      this.selectedBook = book;
+      this.success = "";
+    },
+
+    registerBook() {
+      if (!this.studentName || !this.studentId || !this.duration) {
+        alert("Please fill all fields!");
+        return;
+      }
+
+      this.success = "Book borrowed successfully!";
+      console.log(this.studentName, this.studentId, this.selectedBook);
+    }
+  }
+});
+
+app.mount('#app');
+</script>
+
+</body>
+</html>
