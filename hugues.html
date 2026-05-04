@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course Registration</title>
+  <link rel="icon" type="image/PNG" href="logo school.png">
+  <script src="https://unpkg.com/vue@3"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      margin: 0;
+    }
+
+    .container {
+      width: 500px;
+      margin: 40px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #667eea;
+      border: none;
+      color: white;
+      font-size: 16px;
+      margin-top: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    .course-box {
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .nav {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="app">
+
+  <!-- Navigation Link -->
+  <div class="nav">
+    <a href="index.html">Student Registration</a>
+    <a href="course-registration.html">Course Registration</a>
+  </div>
+
+  <div class="container">
+    <h2>Course Registration Form</h2>
+
+    <!-- Student Info -->
+    <label>Student ID</label>
+    <input type="text" v-model="form.studentId">
+
+    <label>Student Name</label>
+    <input type="text" v-model="form.studentName">
+
+    <!-- Course Selection -->
+    <label>Select Course</label>
+    <select v-model="selectedCourse" @change="loadCourse">
+      <option disabled value="">Choose course</option>
+      <option v-for="course in courses" :value="course">{{course.name}}</option>
+    </select>
+
+    <!-- Course Info Display -->
+    <div class="course-box" v-if="selectedCourse">
+      <p><strong>Course Code:</strong> {{selectedCourse.code}}</p>
+      <p><strong>Instructor:</strong> {{selectedCourse.instructor}}</p>
+      <p><strong>Duration:</strong> {{selectedCourse.duration}}</p>
+      <p><strong>Credits:</strong> {{selectedCourse.credits}}</p>
+    </div>
+
+    <!-- Semester -->
+    <label>Semester</label>
+    <select v-model="form.semester">
+      <option disabled value="">Select semester</option>
+      <option>Semester 1</option>
+      <option>Semester 2</option>
+    </select>
+
+    <!-- Payment -->
+    <label>Payment Method</label>
+    <select v-model="form.payment">
+      <option disabled value="">Select payment</option>
+      <option>Mobile Money</option>
+      <option>Bank Transfer</option>
+      <option>Cash</option>
+    </select>
+
+    <!-- Agreement -->
+    <label>
+      <input type="checkbox" v-model="form.agree">
+      I confirm this course registration is correct
+    </label>
+
+    <!-- Error -->
+    <div class="error" v-if="error">{{error}}</div>
+
+    <!-- Button -->
+    <button @click="submitForm">Register Course</button>
+
+    <!-- Success -->
+    <div class="success" v-if="success">{{success}}</div>
+
+  </div>
+</div>
+
+<script>
+const app = Vue.createApp({
+  data() {
+    return {
+      form: {
+        studentId: "",
+        studentName: "",
+        semester: "",
+        payment: "",
+        agree: false
+      },
+      selectedCourse: "",
+      error: "",
+      success: "",
+      courses: [
+        { name: "Computer Science", code: "CS101", instructor: "Mr. John", duration: "6 Months", credits: 3 },
+        { name: "Mathematics", code: "MTH102", instructor: "Mrs. Alice", duration: "6 Months", credits: 4 },
+        { name: "Physics", code: "PHY103", instructor: "Dr. Smith", duration: "6 Months", credits: 3 },
+        { name: "Biology", code: "BIO104", instructor: "Dr. Jane", duration: "6 Months", credits: 2 }
+      ]
+    }
+  },
+  methods: {
+    loadCourse() {
+      console.log(this.selectedCourse);
+    },
+    submitForm() {
+      this.error = "";
+      this.success = "";
+
+      if (!this.form.studentId || !this.form.studentName || !this.selectedCourse) {
+        this.error = "Please fill all required fields!";
+        return;
+      }
+
+      if (!this.form.agree) {
+        this.error = "You must confirm registration!";
+        return;
+      }
+
+      this.success = "Course Registered Successfully!";
+      console.log(this.form, this.selectedCourse);
+    }
+  }
+});
+
+app.mount('#app');
+</script>
+
+</body>
+</html>
